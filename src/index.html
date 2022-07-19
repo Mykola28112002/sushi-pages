@@ -1,14 +1,80 @@
+
 <!DOCTYPE html>
-<html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page title</title>
+<html lang="ua">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./sass/index.scss" />
-    <script type="module" src="./index.js"></script>
-  </head>
-  <body>
-    <!-- ❗️❗️❗️ Add partials like so for every page -->
-    <include src="./partials/example.html"></include>
-  </body>
+    <title>TU TAJ</title>
+    <link rel="icon" type="image/png" href="./images/logo.png" />
+</head>
+<body>
+    <include src="./partials/cap.html"></include>
+
+<section class="js_golo">
+    <div class="golovna-flex">
+        <div class="containers-golovna">
+            <div class="info__box">
+                <img class="info__img" src="./images/golovna.jpg" alt="">
+                <h1 class="info__title">
+                    <span class="info__title-sp">Sushi TU TAJ.<br>Замов свої улюблені суші прямо до дому</span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="ulublene">
+        <h2 class="info__ulublene-title">Обери улюблене:</h2>
+        <ul class="ulublene__list container">
+            <li class="ulublene__item">
+                <button class="ulublene__link se">
+                    <img src="./images/Love-is.jpg" alt="" width="130">
+                    <p class="ulublene__text">Сети</p>
+
+                </button>
+            </li>
+            <li class="ulublene__item">
+                <button class="ulublene__link ro" >
+                    <img src="./images/pngwing.com.jpg" alt="" width="130">
+                    <p class="ulublene__text">Роли</p>
+                </button>
+            </li>
+            <li class="ulublene__item">
+                <button class="ulublene__link sal" >
+                    <img class="image-switch__img img" src="./images/Salad-PNG.png" alt="" width="130">
+                    <p class="ulublene__text">Салати</p>
+                </button>
+            </li>
+            <li class="ulublene__item">
+                <button class="ulublene__link nap">
+                    <img src="./images/cocktail.jpg" alt="" width="130">
+                    <p class="ulublene__text">Напої</p>
+                </button>
+            </li>
+        </ul>
+    </div>
+    <section>
+        <h2 class="tabl__title">Алергени в продукції Sushi TU TAJ</h2>
+        <div class="tabl">
+            <img class="tabl__img" src="./images/tabl.png" alt="">
+        </div>
+    </section>
+</section>
+
+<include src="./partials/akcczii.html"></include>
+<include src="./partials/menu.html"></include>
+<include src="./partials/napoy.html"></include>
+<include src="./partials/salaty.html"></include>
+<include src="./partials/sety.html"></include>
+<include src="./partials/footer.html"></include>
+
+<script type="module" src="./index.js"></script>
+</body>
 </html>
