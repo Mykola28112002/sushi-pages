@@ -5,7 +5,9 @@ const cart = document.querySelector('.cart');
 const cartQuantity = document.querySelector('.cart__quantity');
 const fullPrice = document.querySelector('.fullprice');
 const cartBox = document.querySelector('.box__js');
+let cartNumber = document.querySelector('.cart-product__number');
 
+let number = 0;
 
 let price = 0;
 
@@ -47,15 +49,16 @@ const generateCartProduct = (img, title, price, id) => {
         <li class="cart__item product" data-id="${id}">
 			<div class="cart__box">
 				<img class="image-switch__img img" src ="${img}" alt="" width="130">
-				<div>
+				<div class="btn__box">
 				    <h2 class="cart-item__title">${title}</h2>
 					<span class="cart-product__price">${normalPrice(price)}</span>
+					<div class="btn__boxs">
+					    <button class="btn_plus">+</button>
+						<span class="cart-product__number">1</span>
+                    	<button class="btn_min">-</button>
+					</div>
 				</div>
-				<button  type="button" class="corzina-btn__close">
-					<svg class="btn__close-svg">
-						<use class="icon-cross" href="images/symbol-defs.svg#icon-close"></use>
-					</svg>
-				</button>
+				<button  type="button" class="corzina-btn__close">x</button>
 			</div>
 		</li>
 	`;
@@ -102,5 +105,23 @@ productsBtn.forEach(el => {
 });
 
 cartProductsList.addEventListener('click', (e) => {
-	deleteProducts(e.target.closest('.product'))
+	const cartBtnClose = document.querySelectorAll('.corzina-btn__close');
+	const cartBtnPlus = document.querySelectorAll('.btn_plus');
+	const cartBtnMin = document.querySelectorAll('.btn_min');
+	for (const sdsd of cartBtnClose) {
+		if (e.target === sdsd) {
+			deleteProducts(e.target.closest('.product'))
+		}
+	}
+	for (const sdsd of cartBtnPlus) {
+		if (e.target === sdsd) {
+			// e.target.cartNumber.textContent = number
+			console.log(e.currentTarget.sdsd)
+		}
+	}
+	for (const sdsd of cartBtnMin) {
+		if (e.target === sdsd) {
+			// e.target.cartNumber.textContent = number
+		}
+	}
 });

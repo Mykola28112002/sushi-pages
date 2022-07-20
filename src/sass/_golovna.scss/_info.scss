@@ -120,12 +120,21 @@
     font-size: 15px;
 }
 .ulublene__link {
+    padding: 0;
     display: flex;
+    align-items: center;
     height: 100%;
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 0 0 5px 5px grey;
-    
+    & .image-switch__img.img {
+        width: 150px;
+
+        @media screen and(max-width: 320px) {
+            width: 130px;
+        }
+    }
+
 }
 .ulublene__item {
     margin-bottom: 20px;

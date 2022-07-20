@@ -2,18 +2,13 @@
 @import "./variables";
 @import "./basic-styles";
 /* меню */
-@import "./_menu.scss/rolu";
-@import "./_menu.scss/futomaki";
-@import "./_menu.scss/maki";
-@import "./_menu.scss/hot-rolu";
-@import "./_menu.scss/nigiri";
+@import "./_rolu";
 // головна
 @import "./_golovna.scss/cap";
 @import "./_napoy.scss/napoy";
 @import "./_golovna.scss/footer";
 @import "./_golovna.scss/info";
 @import "./_sety.scss/sety";
-@import "./_akzcii.scss/akzcii";
 @import "./_korzina.scss/corzina";
 @import "./_korzina.scss/form";
 
@@ -22,12 +17,36 @@ button {
     background-color: rgba(47, 48, 58, 0);
     border: none;
 }
-.btn__close-svg {
-    fill: gold;
-}
+
 .none {
     display: none;
 }
 .node {
     display: block;
+}
+.btn__box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btn__boxs {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.btn_plus,
+.btn_min {
+    color: aliceblue;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    border: 1px solid gold;
+}
+
+.cart-product__number {
+    display: block;
+    margin-left: 15px;
+    margin-right: 15px;
 }
