@@ -7,7 +7,7 @@ const fullPrice = document.querySelector('.fullprice');
 const cartBox = document.querySelector('.box__js');
 let cartNumber = document.querySelector('.cart-product__number');
 
-let number = 0;
+
 
 let price = 0;
 
@@ -22,15 +22,15 @@ const priceWithoutSpaces = (str) => {
 };
 
 const normalPrice = (str) => {
-	return String(str).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+	return Number.parseInt(str);
 };
 
 const plusFullPrice = (currentPrice) => {
-	return price += Math.round(currentPrice) + 1 ;
+	return price += Math.round(currentPrice)  ;
 };
 
 const minusFullPrice = (currentPrice) => {
-	return price -= Math.round(currentPrice) + 1;
+	return price -= Math.round(currentPrice) ;
 };
 const printFullPrice = () => {
 	fullPrice.textContent = `${normalPrice(price)} zl`;
@@ -103,7 +103,24 @@ productsBtn.forEach(el => {
 
     
 });
+let numbers = 0;
+const plusFulle = () => {
+	return numbers += 1  ;
+};
 
+const minusFull = () => {
+	return numbers -= 1 ;
+};
+
+let praces = 0;
+let pra = 0;
+const praceplusFulle = (praces,numbers ) => {
+	return pra = numbers * Number(praces)  ;
+};
+
+const praceminusFull = (praces,numbers) => {
+	return pra = (numbers -1 )* Number(praces) ;
+};
 cartProductsList.addEventListener('click', (e) => {
 	const cartBtnClose = document.querySelectorAll('.corzina-btn__close');
 	const cartBtnPlus = document.querySelectorAll('.btn_plus');
@@ -113,15 +130,33 @@ cartProductsList.addEventListener('click', (e) => {
 			deleteProducts(e.target.closest('.product'))
 		}
 	}
+	
 	for (const sdsd of cartBtnPlus) {
+		
 		if (e.target === sdsd) {
-			// e.target.cartNumber.textContent = number
-			console.log(e.currentTarget.sdsd)
+			numbers = Number(e.target.parentNode.querySelector(".cart-product__number").textContent)
+			plusFulle()
+			e.target.parentNode.querySelector(".cart-product__number").textContent = numbers
+            let praces = e.target.parentNode.parentNode.querySelector(".cart-product__price").textContent
+			praceplusFulle(praces,numbers)
+			e.target.parentNode.parentNode.querySelector(".cart-product__price").textContent = pra
+           
 		}
+	
 	}
 	for (const sdsd of cartBtnMin) {
+		
 		if (e.target === sdsd) {
-			// e.target.cartNumber.textContent = number
+			minusFull()
+			if (numbers < 1) {
+				numbers = 1
+			} else {
+				e.target.parentNode.querySelector(".cart-product__number").textContent = numbers
+			}
+			let praces = e.target.parentNode.parentNode.querySelector(".cart-product__price").textContent
+			praceminusFull(praces,numbers)
+			e.target.parentNode.parentNode.querySelector(".cart-product__price").textContent = pra
+            
 		}
 	}
 });
