@@ -6,12 +6,23 @@ const cartQuantity = document.querySelector('.cart__quantity');
 const fullPrice = document.querySelector('.fullprice');
 const cartBox = document.querySelector('.box__js');
 let cartNumber = document.querySelector('.cart-product__number');
+let array = []
 
+
+
+// const localStorageHost = () => {
+// 	const productsLi = document.querySelectorAll('.cart__item');
+// 	for (const li of productsLi) {
+// 		const liItem = li.outerHTML
+// 		array.push(liItem)
+// 	}
+// 	sessionStorage.setItem('li',JSON.stringify(array))
+// 	console.log(sessionStorage.getItem('li'))
+	
+// }
 
 
 let price = 0;
-
-
 
 const randomId = () => {
 	return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -32,16 +43,30 @@ const plusFullPrice = (currentPrice) => {
 const minusFullPrice = (currentPrice) => {
 	return price -= Math.round(currentPrice) ;
 };
-const printFullPrice = () => {
-	fullPrice.textContent = `${normalPrice(price)} zl`;
-};
+
+
 const printQuantity = () => {
 	let productsListLength = document.querySelector('.list__js').children.length;
 	cartQuantity.textContent = productsListLength;
 	productsListLength === 0 ? cartQuantity.classList.add('un-active-qvontiti') : cartQuantity.classList.remove('un-active-qvontiti');
 
 };
-
+const printFullPrice = () => {
+	fullPrice.textContent = `${normalPrice(price)} zl`;
+};
+const full = document.querySelector(".print_fullprice")
+const printFull = () => {
+	full.textContent = `${normalPrice(printPrice)} zl`;
+};
+let printPrice = 0;
+let priceSym = 0;
+const plusFull = (curre,values) => {
+	return priceSym = values * curre;
+};
+const FullPrice = (currentPrice) => {
+	printPrice = priceSym
+	return printPrice += Math.round(currentPrice);
+};
 printQuantity();
 const generateCartProduct = (img, title, price, id) => {
 	return `
@@ -51,11 +76,10 @@ const generateCartProduct = (img, title, price, id) => {
 				<img class="image-switch__img img" src ="${img}" alt="" width="130">
 				<div class="btn__box">
 				    <h2 class="cart-item__title">${title}</h2>
+					<span class="cart-product__price-sum">${normalPrice(price)}</span>
 					<span class="cart-product__price">${normalPrice(price)}</span>
 					<div class="btn__boxs">
-					    <button class="btn_plus">+</button>
-						<span class="cart-product__number">1</span>
-                    	<button class="btn_min">-</button>
+						<input class="cart-product__number" minlength="1" maxlength="3" value="1" type="number" name="value" >
 					</div>
 				</div>
 				<button  type="button" class="corzina-btn__close">x</button>
@@ -68,10 +92,12 @@ const deleteProducts = (productParent) => {
 	let id = productParent.dataset.id;
 	
 	document.querySelector(`.item-js[data-id="${id}"]`).querySelector('.corzina-btn').disabled = false;
-	let currentPrice = parseInt(priceWithoutSpaces(productParent.querySelector('.cart-product__price').textContent));
+	let currentPrice = parseInt(priceWithoutSpaces(productParent.querySelector('.cart-product__price-sum').textContent));
 	minusFullPrice(currentPrice);
 	printFullPrice();
 	productParent.remove();
+	FullPrice(currentPrice)
+	printFull()
 	printQuantity();
 };
 
@@ -90,11 +116,14 @@ productsBtn.forEach(el => {
 		plusFullPrice(priceNumber);
 
 		printFullPrice();
+		printFull()
 
 		cartProductsList.insertAdjacentHTML('afterbegin', generateCartProduct(img, title, priceString, id));
 		printQuantity();
-
 		
+
+		// localStorageHost()
+
 		self.disabled = true;
 
 		
@@ -103,60 +132,68 @@ productsBtn.forEach(el => {
 
     
 });
-let numbers = 0;
-const plusFulle = () => {
-	return numbers += 1  ;
-};
 
-const minusFull = () => {
-	return numbers -= 1 ;
-};
 
-let praces = 0;
-let pra = 0;
-const praceplusFulle = (praces,numbers ) => {
-	return pra = numbers * Number(praces)  ;
-};
-
-const praceminusFull = (praces,numbers) => {
-	return pra = (numbers -1 )* Number(praces) ;
-};
 cartProductsList.addEventListener('click', (e) => {
+	const priceSum = document.querySelector(".fullprice");
+    const printFullprice = document.querySelector(".print_fullprice"); 
 	const cartBtnClose = document.querySelectorAll('.corzina-btn__close');
-	const cartBtnPlus = document.querySelectorAll('.btn_plus');
-	const cartBtnMin = document.querySelectorAll('.btn_min');
 	for (const sdsd of cartBtnClose) {
+		
 		if (e.target === sdsd) {
 			deleteProducts(e.target.closest('.product'))
+			let currentPrice = e.currentTarget.parentNode.parentNode.querySelector(".cart-product__price-sum").textContent
+			
+			FullPrice(currentPrice)
+			printFull()
+		}	
+	}
+	
+	
+		
+	const input = document.querySelectorAll(".cart-product__number")
+	for (const sdsd of input) {
+		if (e.target === sdsd) {
+			sdsd.addEventListener('input', (e) => {
+				let values = e.target.value
+
+				if (values == 1) {
+					const curre = e.currentTarget.parentNode.parentNode.querySelector(".cart-product__price").textContent
+                    console.log(curre)
+					e.currentTarget.parentNode.parentNode.querySelector(".cart-product__price-sum").textContent = curre;
+					plusFull(curre, values)
+					// let price = 0;
+					const priceSum = document.querySelector(".fullprice");
+					const printFullprice = document.querySelector(".print_fullprice");
+					printFullprice.textContent = priceSum.textContent;
+				}
+				if (values >= 2) {
+					let curre = e.currentTarget.parentNode.parentNode.querySelector(".cart-product__price-sum").textContent
+					plusFull(curre, values)
+					e.currentTarget.parentNode.parentNode.querySelector(".cart-product__price-sum").textContent = priceSym
+					
+					let currentPrice = e.currentTarget.parentNode.parentNode.querySelector(".cart-product__price-sum").textContent
+					console.log(currentPrice)
+					// let price = 0;
+					FullPrice(currentPrice)
+					printFull()
+				} else {
+					console.log('kjxnfvljknzslkvn')
+				}
+
+				
+		    })
 		}
 	}
 	
-	for (const sdsd of cartBtnPlus) {
-		
-		if (e.target === sdsd) {
-			numbers = Number(e.target.parentNode.querySelector(".cart-product__number").textContent)
-			plusFulle()
-			e.target.parentNode.querySelector(".cart-product__number").textContent = numbers
-            let praces = e.target.parentNode.parentNode.querySelector(".cart-product__price").textContent
-			praceplusFulle(praces,numbers)
-			e.target.parentNode.parentNode.querySelector(".cart-product__price").textContent = pra
-           
-		}
-	
-	}
-	for (const sdsd of cartBtnMin) {
-		
-		if (e.target === sdsd) {
-			minusFull()
-			if (numbers < 1) {
-				numbers = 1
-			} else {
-				e.target.parentNode.querySelector(".cart-product__number").textContent = numbers
-			}
-			let praces = e.target.parentNode.parentNode.querySelector(".cart-product__price").textContent
-			praceminusFull(praces,numbers)
-			e.target.parentNode.parentNode.querySelector(".cart-product__price").textContent = pra
-            
-		}
-	}
+
+
 });
+
+
+
+// const sawedLocal = sessionStorage.getItem('li')
+// const parsLocal = JSON.parse(sawedLocal) 
+// cartProductsList.innerHTML = parsLocal;
+
+printQuantity();
