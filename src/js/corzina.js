@@ -64,7 +64,7 @@ const plusFull = (curre,values) => {
 	return priceSym = values * curre;
 };
 const FullPrice = (currentPrice) => {
-	printPrice = priceSym
+	printPrice = 0
 	return printPrice += Math.round(currentPrice);
 };
 printQuantity();
@@ -143,6 +143,7 @@ cartProductsList.addEventListener('click', (e) => {
 		if (e.target === sdsd) {
 			deleteProducts(e.target.closest('.product'))
 			let currentPrice = e.currentTarget.parentNode.parentNode.querySelector(".cart-product__price-sum").textContent
+			console.log(currentPrice)
 			
 			FullPrice(currentPrice)
 			printFull()
@@ -161,6 +162,7 @@ cartProductsList.addEventListener('click', (e) => {
 					const curre = e.currentTarget.parentNode.parentNode.querySelector(".cart-product__price").textContent
                     console.log(curre)
 					e.currentTarget.parentNode.parentNode.querySelector(".cart-product__price-sum").textContent = curre;
+					console.log(e.currentTarget.parentNode.parentNode.querySelector(".cart-product__price-sum").textContent)
 					plusFull(curre, values)
 					// let price = 0;
 					const priceSum = document.querySelector(".fullprice");
@@ -168,12 +170,12 @@ cartProductsList.addEventListener('click', (e) => {
 					printFullprice.textContent = priceSum.textContent;
 				}
 				if (values >= 2) {
-					let curre = e.currentTarget.parentNode.parentNode.querySelector(".cart-product__price-sum").textContent
+					let curre = e.currentTarget.parentNode.parentNode.querySelector(".cart-product__price").textContent
 					plusFull(curre, values)
 					e.currentTarget.parentNode.parentNode.querySelector(".cart-product__price-sum").textContent = priceSym
 					
 					let currentPrice = e.currentTarget.parentNode.parentNode.querySelector(".cart-product__price-sum").textContent
-					console.log(currentPrice)
+					
 					// let price = 0;
 					FullPrice(currentPrice)
 					printFull()
